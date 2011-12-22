@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel="stylesheet" href="assets/css/bootstrap/bootstrap.css">
+		<link rel="stylesheet" href="assets/css/style.css">
+	</head>
+	<body>		
+		<div class="topbar">
+			<div class="topbar-inner">
+				<div class="container">
+					<a href="/" class="brand push">Helpdesk</a>
+
+					<ul class="nav">
+						<li>
+							<a href='/' class="push">Projects</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<article class="container">
+			<div class="row">
+				<aside class="span-one-third">
+					<div>
+						<ul class="pills">
+							<li class="active">
+								<a href="/" class="push">Projects</a>
+							</li>
+							<li>
+								<a href="/">Stats</a>
+							</li>
+						</ul>
+					</div>				
+				</aside>
+				<div class="span-two-thirds" id="content">
+					<section id="projects_list" class="{%if not action%}active{%endif%}">
+						Loading...
+					</section>
+					<section id="add_project" class="{%if action == 'add'%}active{%endif%}">
+						<form class="form-stacked" onsubmit="return false">
+							<h1>Creating Project</h1>
+
+							<fieldset>
+								<div class="clearfix">
+									<label>Project name</label>
+									<div class="input">
+										<input type="text" class="xlarge" name="name" />
+									</div>
+								</div>
+							</fieldset>
+
+							<fieldset>
+								<div class="clearfix">
+									<label>Android Market URL</label>
+									<div class="input">
+										<input type="text" class="xlarge" name="appstore"/>
+									</div>
+								</div>
+								<div class="clearfix">
+									<label>AppStore URL</label>
+									<div class="input">
+										<input type="text" class="xlarge" name="android" />
+									</div>
+								</div>
+							</fieldset>
+							<div class="actions">
+								<button type="submit" class="btn primary">Add Project</button>
+								<a href="/" class="btn">Cancel</a>
+							</div>
+						</form>
+					</section>
+				</div>
+			</div>
+		</article>
+
+		<script id="projects_tmpl" type="text/template">
+			{%include 'projects.html'%}
+		</script>
+
+
+		<script type="text/javascript" src="assets/javascript/lib/jquery.min.js"></script>
+		<script type="text/javascript" src="assets/javascript/lib/underscore-min.js"></script>
+		<script type="text/javascript" src="assets/javascript/lib/backbone-min.js"></script>
+		<script type="text/javascript" src="assets/javascript/lib/handlebars.js"></script>
+		<script type="text/javascript" src="assets/javascript/lib/store.js"></script>
+		<script type="text/javascript" src="assets/javascript/app.js"></script>
+	
+		<script>
+			App.projects.reset({{projects_json}})
+		</script>
+
+	</body>
+</html>

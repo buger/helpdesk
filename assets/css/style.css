@@ -1,0 +1,42 @@
+/* Variables.less
+ * Variables to customize the look and feel of Bootstrap
+ * ----------------------------------------------------- */
+/* Mixins.less
+ * Snippets of reusable CSS to develop faster and keep code readable
+ * ----------------------------------------------------------------- */
+body {
+  padding-top: 40px;
+}
+article aside {
+  margin-top: 20px;
+}
+article aside > div {
+  min-height: 500px;
+  background: #efefef;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+article aside > div .pills li {
+  display: inline;
+  float: none;
+  font-size: 20px;
+}
+article aside > div .pills li a {
+  padding: 5px 15px;
+}
+article section {
+  margin-top: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  display: none !important;
+  background: white;
+}
+article section.active {
+  display: block !important;
+}

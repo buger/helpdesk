@@ -1,0 +1,17 @@
+{% raw %}
+	{{#if projects.length}}
+		<h1>List of your Projects</h1>
+
+		<ul class="projects">
+			{{#projects}}
+			<li>
+				<span>{{name}}</span>
+				<a class="delete" data-project="{{id}}">delete</a>
+			</li>
+			{{/projects}}
+		</ul>							
+	{{else}}
+		<h1>Start by creating new project</h1>
+		<a href="/add" class="btn success large push">Create Project</a>
+	{{/if}}	
+{% endraw %}

@@ -5,6 +5,17 @@ api_version: 1
 threadsafe: true
 
 handlers:
+- url: /favicon.ico
+  static_files: assets/img/favicon.ico
+  upload: assets/img/favicon.ico
+
+- url: /robots.txt
+  static_files: assets/robots.txt
+  upload: assets/robots.txt
+
+- url: /assets
+  static_dir: assets
+
 - url: /.*
   script: main.app
 
