@@ -1,12 +1,10 @@
 import webapp2
-import lib.appstore.api as appstore
-import lib.android_market.api as android_market
 
 import jinja2
 import os
 import json
 
-from google.appengine.ext import db
+from models import *
 
 
 jinja_environment = jinja2.Environment(
@@ -27,50 +25,29 @@ class BaseHandler(webapp2.RequestHandler):
         self.response.out.write(string)
 
 
-class AppStorePage(webapp2.RequestHandler):
-    def get(self):        
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.out.write(appstore.getReviews(143441, 431451004))
-
-
-class AndroidMarketPage(webapp2.RequestHandler):
-    def get(self):  
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.out.write(android_market.getReviews('','com.masshabit.squibble.paid'))
-
 
 class DashboardPage(webapp2.RequestHandler):
-    def get(self, action):
-        projects = Project.all().fetch(100)
+    def get(self, action = None, project_id = None):
+        if action is not None:
+            projects = Project.all().fetch(100)
 
-        projects_json = json.dumps(map(lambda p: p.to_json(), projects))
+            projects_json = json.dumps(map(lambda p: p.to_json(), projects))
 
-        template_values = {
-            'action': action,
-            'projects': projects,
-            'projects_json': projects_json,
-            'projects_count': len(projects)
-        }
+            template_values = {
+                'action': action,
+                'project_id': project_id,
+                'projects': projects,
+                'projects_json': projects_json,
+                'projects_count': len(projects)
+            }
 
-        template = jinja_environment.get_template('dashboard.html')
+            template = jinja_environment.get_template('dashboard.html')
+        else:
+            template = jinja_environment.get_template('index.html')
+            template_values = {}
 
         self.response.out.write(template.render(template_values))
 
-
-class Project(db.Model):  
-    owner = db.UserProperty()
-    name = db.StringProperty()
-    android_url = db.StringProperty()
-    appstore_url = db.StringProperty()
-    date = db.DateTimeProperty(auto_now_add=True)
-
-    def to_json(self):
-        return {
-            'id': self.key().id(),
-            'name': self.name,
-            'android_url': self.android_url,
-            'appstore_url': self.appstore_url
-        }
 
 
 class ProjectsHandler(BaseHandler):
@@ -78,17 +55,21 @@ class ProjectsHandler(BaseHandler):
         model = json.loads(self.request.body)
 
         project = Project(name = model['name'],
-                          android_url = model['android'],
-                          appstore_url = model['appstore'])
+                          android_id = model['android_id'],
+                          appstore_id = model['appstore_id'])
         project.put()
 
         self.render_json(project.to_json())
 
 
-    def get(self):
-        projects = Project.all()
-
-        self.render_json(map(lambda p: p.to_json(), projects))
+    def get(self, project_id = None):
+        if project_id is None:            
+            projects = Project.all()
+            self.render_json(map(lambda p: p.to_json(), projects))
+        else:
+            project_key = db.Key.from_path("Project", int(project_id))
+            interactions = Interaction.all().ancestor(project_key).order('-created_at')
+            self.render_json(map(lambda p: p.to_json(), interactions))
 
 
     def delete(self, project_id):
@@ -98,14 +79,25 @@ class ProjectsHandler(BaseHandler):
         self.render_json({ 'status': 'DELETED' })
 
 
-app = webapp2.WSGIApplication(
-    [
-        ('/appstore', AppStorePage),
-        ('/android-market', AndroidMarketPage),
+class CheckProjectHandler(BaseHandler):
+    def get(self, project_id):
+        project = Project.get_by_id(int(project_id))
+        project.check()
 
-        ('/api/projects', ProjectsHandler),
-        ('/api/projects/(.*)', ProjectsHandler),
-        
-        ('/(.*)', DashboardPage)
+
+class InteractionsHandler(BaseHandler):
+    def post(self):
+        model = json.loads(self.request.body)
+
+
+app = webapp2.WSGIApplication(
+    [       
+        (r'/api/projects/check/(\d+)', CheckProjectHandler),
+        (r'/api/projects', ProjectsHandler),
+        (r'/api/projects/(\d+)', ProjectsHandler),   
+             
+        (r'/(\w+)/(\d+)', DashboardPage),
+        (r'/(\w+)', DashboardPage),
+        (r'/', DashboardPage)
     ],
 debug=True)

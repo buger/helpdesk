@@ -1,0 +1,15 @@
+{% raw %}
+
+<h1>Your Projects</h1>
+
+<ul class="pills">
+	{{#each projects}}
+	<li {{#if active}}class="active"{{/if}}>
+		<a href="/interactions/{{id}}">{{name}}</a>
+	</li>
+	{{/each}}
+</ul>
+
+<a href="/add" class="btn success push">Add Project</a>
+
+{% endraw %}

@@ -1,11 +1,12 @@
 {% raw %}
 	{{#if projects.length}}
 		<h1>List of your Projects</h1>
-
+		
 		<ul class="projects">
 			{{#projects}}
 			<li>
 				<span>{{name}}</span>
+				<a href="/interactions/{{id}}">Interactions</a>
 				<a class="delete" data-project="{{id}}">delete</a>
 			</li>
 			{{/projects}}

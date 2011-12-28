@@ -1,7 +1,17 @@
 @App = 
 	views: {}
 
+
+class Interaction extends Backbone.Model
+
+class InteractionsCollection extends Backbone.Collection
+	model: Interaction
+
+
 class Project extends Backbone.Model	
+	initialize: ->
+		@interactions = new InteractionsCollection()
+		@interactions.url = "/api/projects/#{@id}"
 
 
 class ProjectsCollection extends Backbone.Collection
@@ -11,6 +21,7 @@ class ProjectsCollection extends Backbone.Collection
 	url: "/api/projects"
 
 App.projects = new ProjectsCollection()
+App.projects.reset(projects)
 
 
 class Section extends Backbone.View
@@ -59,7 +70,7 @@ class AddProjectForm extends Section
 
 
 	render: ->
-		Section::render.call @		
+		Section::render.call @
 
 		@$('form').trigger('reset')
 
@@ -78,8 +89,57 @@ class AddProjectForm extends Section
 			error: ->
 				console.error ':('				
 
-
 App.views.add_project_form = new AddProjectForm()
+
+
+class InteractionsList extends Section
+
+	template: Handlebars.compile $("#interactions_tmpl").html()
+
+	el: $('#interactions')	
+
+
+	render: (project_id) ->
+		Section::render.call @
+
+		project = App.projects.get(project_id)
+
+		@el.html @template {
+			'interactions': project.interactions.toJSON()
+			'project': project.toJSON()
+		}
+
+		project.interactions.fetch
+			success: =>
+				@el.html @template {
+					'interactions': project.interactions.toJSON()
+					'project': project.toJSON()
+				}
+
+App.views.interactions_list = new InteractionsList()
+
+
+class Sidebar extends Backbone.View
+
+	template: Handlebars.compile $("#sidebar_tmpl").html()
+
+	el: $('#sidebar')
+
+	initialize: -> @render()
+
+	render: (project_id) ->
+		projects = App.projects.toJSON()
+		projects = _.map projects, (p) -> 
+			p.active = project_id is p.id
+			p
+
+		@el.html @template {
+			'projects': projects
+			'active_project': project_id
+		}		
+
+App.views.sidebar = new Sidebar()
+
 
 
 class AppRouter extends Backbone.Router
@@ -87,14 +147,18 @@ class AppRouter extends Backbone.Router
 	routes:
     	".*": "home"
     	"add": "addProject"
+    	"interactions/:pid": "showInteractions"
 
-    home: -> 
-    	console.warn 'home' 
+    home: ->     	
     	App.views.projects_list.render()
+    	App.views.sidebar.render()
 
     addProject: ->
-    	console.warn 'asasd'
     	App.views.add_project_form.render()
+
+    showInteractions: (project_id) ->
+    	App.views.interactions_list.render(project_id)
+    	App.views.sidebar.render(project_id)
   
 
 App.router = new AppRouter()
@@ -107,5 +171,5 @@ $('a').live 'click', (evt) ->
 		App.router.navigate href, true
 		false
 	
-$ -> 
-	Backbone.history.start pushState: true
+
+_.defer -> Backbone.history.start pushState: true

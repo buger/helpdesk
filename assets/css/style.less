@@ -20,7 +20,7 @@ article {
 			padding: 20px;
 
 			.pills li {
-				display: inline;
+				display: block;
 				float: none;
 				font-size: 20px;
 
@@ -41,6 +41,41 @@ article {
 
 		&.active {
 			display: block !important;
+		}
+
+		.interactions {
+			li { 
+				margin-bottom: 10px; 
+				padding: 5px;
+				padding-left: 10px;
+				list-style: none;
+
+				&.rank_1, &.rank_2, &.rank_3, &.rank_4 {
+					color: #333;
+				}				
+								
+				&.rank_1, &.rank_2 { border-left: 4px solid #E31230; }
+				&.rank_3 { border-left: 4px solid #F89406; }
+				&.rank_4 { border-left: 4px solid #EEDC94; }
+				&.rank_5 { border-left: 4px solid #eee; }
+
+				.label.IOS { background-color: #62CFFC; }
+				.label.Android { background-color: #A4C639; }
+
+				.preview { display: none; }
+
+				&.rank_5 {
+					color: #aaa;
+					.preview { display: block; }
+					.full { display: none; }
+
+					div {
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
+				}
+			}			
 		}
 	}
 }

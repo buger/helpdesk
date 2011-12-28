@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link rel="stylesheet" href="assets/css/bootstrap/bootstrap.css">
-		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.css">
+		<link rel="stylesheet" href="/assets/css/style.css">
 	</head>
 	<body>		
 		<div class="topbar">
@@ -22,19 +22,15 @@
 		<article class="container">
 			<div class="row">
 				<aside class="span-one-third">
-					<div>
-						<ul class="pills">
-							<li class="active">
-								<a href="/" class="push">Projects</a>
-							</li>
-							<li>
-								<a href="/">Stats</a>
-							</li>
-						</ul>
-					</div>				
+					<div id="sidebar">
+						Loading...						
+					</div>	
 				</aside>
 				<div class="span-two-thirds" id="content">
 					<section id="projects_list" class="{%if not action%}active{%endif%}">
+						Loading...
+					</section>
+					<section id="interactions" class="{%if action == 'interactions'%}active{%endif%}">
 						Loading...
 					</section>
 					<section id="add_project" class="{%if action == 'add'%}active{%endif%}">
@@ -54,13 +50,13 @@
 								<div class="clearfix">
 									<label>Android Market URL</label>
 									<div class="input">
-										<input type="text" class="xlarge" name="appstore"/>
+										<input type="text" class="xlarge" name="android_id"/>
 									</div>
 								</div>
 								<div class="clearfix">
 									<label>AppStore URL</label>
 									<div class="input">
-										<input type="text" class="xlarge" name="android" />
+										<input type="text" class="xlarge" name="appstore_id" />
 									</div>
 								</div>
 							</fieldset>
@@ -77,18 +73,25 @@
 		<script id="projects_tmpl" type="text/template">
 			{%include 'projects.html'%}
 		</script>
-
-
-		<script type="text/javascript" src="assets/javascript/lib/jquery.min.js"></script>
-		<script type="text/javascript" src="assets/javascript/lib/underscore-min.js"></script>
-		<script type="text/javascript" src="assets/javascript/lib/backbone-min.js"></script>
-		<script type="text/javascript" src="assets/javascript/lib/handlebars.js"></script>
-		<script type="text/javascript" src="assets/javascript/lib/store.js"></script>
-		<script type="text/javascript" src="assets/javascript/app.js"></script>
-	
-		<script>
-			App.projects.reset({{projects_json}})
+		<script id="interactions_tmpl" type="text/template">
+			{%include 'interactions.html'%}
 		</script>
+		<script id="sidebar_tmpl" type="text/template">
+			{%include 'sidebar.html'%}
+		</script>
+
+		
+		<script type="text/javascript" src="/assets/javascript/lib/jquery.min.js"></script>
+		<script type="text/javascript" src="/assets/javascript/lib/underscore-min.js"></script>
+		<script type="text/javascript" src="/assets/javascript/lib/backbone-min.js"></script>
+		<script type="text/javascript" src="/assets/javascript/lib/handlebars.js"></script>
+		<script type="text/javascript" src="/assets/javascript/lib/store.js"></script>
+
+		<script>
+			var projects = {{projects_json}};
+		</script>
+
+		<script type="text/javascript" src="/assets/javascript/app.js"></script>
 
 	</body>
 </html>

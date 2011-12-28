@@ -1,0 +1,30 @@
+{% raw %}
+	{{#if interactions.length}}
+		<h1>{{project.name}} reviews</h1>
+
+		<ul class="interactions">
+			{{#interactions}}
+			<li class="rank_{{rank}}">
+				<div class="full">
+					<div><b>{{author}}:</b>{{title}}</div>	
+					<p>{{content}}</p>				
+					<div>
+						<span class="label {{source}}">{{source}}</span>
+						{{#if device}}
+						<span class="label">{{device}}</span>
+						{{/if}}
+						{{#if version}}
+						<span class="label">{{version}}</span>
+						{{/if}}
+					</div>
+				</div>
+				<div class="preview">
+					<div title="{{content}}"><b>{{author}}:</b> {{title}} - {{content}}</div>
+				</div>
+			</li>
+			{{/interactions}}
+		</ul>							
+	{{else}}
+		Loading...
+	{{/if}}	
+{% endraw %}

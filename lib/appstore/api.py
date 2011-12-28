@@ -21,6 +21,7 @@ import sys
 import string
 import argparse
 import re
+from datetime import datetime
 
 appStores = {
 'Argentina':          143505,
@@ -120,7 +121,7 @@ def getReviews(appStoreId, appId):
         reviews += ret
         i += 1
 
-        if i > 4:
+        if i > 1:
             break
 
     return reviews
@@ -160,10 +161,12 @@ def _getReviewsForPage(appStoreId, appId, pageNo):
 
         if version_node is None:
             review["version"] = None
+            review["date"] = None
         else:
             match =  re.search("Version ([^\n^\ ]+)\n\s+\n.*\n\s+(.*)", version_node.tail)
             review["version"] = match.group(1)
             review["date"] = match.group(2)
+            review["date"] = datetime.strptime(review["date"], "%b %d, %Y")
     
         user_node = node.find("{http://www.apple.com/itms/}HBoxView/{http://www.apple.com/itms/}TextView/{http://www.apple.com/itms/}SetFontStyle/{http://www.apple.com/itms/}GotoURL/{http://www.apple.com/itms/}b")
         if user_node is None:

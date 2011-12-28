@@ -20,7 +20,7 @@ article aside > div {
   padding: 20px;
 }
 article aside > div .pills li {
-  display: inline;
+  display: block;
   float: none;
   font-size: 20px;
 }
@@ -39,4 +39,51 @@ article section {
 }
 article section.active {
   display: block !important;
+}
+article section .interactions li {
+  margin-bottom: 10px;
+  padding: 5px;
+  padding-left: 10px;
+  list-style: none;
+}
+article section .interactions li.rank_1,
+article section .interactions li.rank_2,
+article section .interactions li.rank_3,
+article section .interactions li.rank_4 {
+  color: #333;
+}
+article section .interactions li.rank_1, article section .interactions li.rank_2 {
+  border-left: 4px solid #E31230;
+}
+article section .interactions li.rank_3 {
+  border-left: 4px solid #F89406;
+}
+article section .interactions li.rank_4 {
+  border-left: 4px solid #EEDC94;
+}
+article section .interactions li.rank_5 {
+  border-left: 4px solid #eee;
+}
+article section .interactions li .label.IOS {
+  background-color: #62CFFC;
+}
+article section .interactions li .label.Android {
+  background-color: #A4C639;
+}
+article section .interactions li .preview {
+  display: none;
+}
+article section .interactions li.rank_5 {
+  color: #aaa;
+}
+article section .interactions li.rank_5 .preview {
+  display: block;
+}
+article section .interactions li.rank_5 .full {
+  display: none;
+}
+article section .interactions li.rank_5 div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

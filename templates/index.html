@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Customer feedback for Mobile Apps</title>
+		<link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.css">
+		<link rel="icon" type="image/png" href="/assets/img/review.png" />
+
+		<style>
+			body {
+				background: #F1F1F1 url(/assets/img/bg-body.gif);
+				color: #333;
+			}
+
+			#section_one {
+				height: 330px;
+				position: relative;
+			}
+
+			.markets img {
+				position: absolute;				
+			}
+
+			.markets .android { top: 30px; left: 50px; }
+			.markets .appstore { top: 40px; left: 200px; }
+			.markets .wp7 { top: 150px; left: 120px; }
+
+			.thanks {
+				position: absolute;
+				right: 10px;
+				top: 170px;				
+				padding: 10px;
+				background-color: #57A957;
+				width: 540px;			
+				color: white;
+				text-align: center;
+			}
+
+			.signup {				
+				position: absolute;
+				right: 10px;
+				top: 170px;				
+				padding: 10px;
+				background-color: #333;
+				width: 540px;			
+			}
+
+			.signup input[type=text] {
+				font-size: 20px;
+				font-weight: bold;
+				color: #333;
+				height: 30px;
+				line-height: 30px;
+				width: 350px;
+				vertical-align: middle;
+				margin-right: 10px;
+			}
+
+			.signup input[type=submit] {
+				font-weight: bold;
+				font-size: 18px;
+				vertical-align: middle;
+				width: 160px;
+			}
+
+			#section_two {
+				height: 350px;
+				color: white;
+			}
+
+			h1 { 
+				position: absolute; 
+				right: 10px;
+				top: 100px;
+				font-size: 36px;
+			}
+			
+			.review1 { bottom: 0px; left: 80px; width: 16px; }	
+			.review2 { bottom: 0px; left: 140px; width: 30px; }		
+			.review3 { bottom: 0px; left: 200px; width: 40px; }		
+			.review4 { bottom: -20px; left: 260px; width: 20px;	}
+			.review5 { bottom: 20px; left: 260px; }
+			.review6 { bottom: 80px; left: 300px; }
+			.review7 { bottom: 100px; left: 60px; }
+			.review8 { bottom: 60px; left: 100px; width: 20px; }
+			.review9 { bottom: -80px; left: 140px; width: 25px; }
+			.review10 { bottom: -50px; left: 200px; width: 28px; }
+
+			.line { 
+				display: none;
+				position: absolute;				
+				border: 4px dashed #333;
+				top: 440px;
+				left: 110px;
+				width: 150px;
+			}
+
+			.reviews {
+				position: absolute;
+				left: 390px;
+				top: 280px;
+			}
+
+			.reviews h2 {
+				margin-bottom: 20px;
+			}
+
+			.reviews span {
+				display: inline-block;
+				background: #333;
+				color: white;
+				border-radius: 37px;
+				padding: 5px;
+				width: 37px;
+				font-size: 30px;
+				margin-right: 10px;
+				text-align: center;
+			}
+
+			.message {
+				width: 100%;
+				font-size: 60px;
+				text-align: center;
+				line-height: 36px;
+			}
+
+			.footer {
+				
+			}
+		</style>
+
+		<!-- start Mixpanel --><script type="text/javascript">var mpq=[];mpq.push(["init","8aed5a24b5ef8c0e66e607da38898de3"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
+		</script><!-- end Mixpanel -->
+
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row" id="section_one">				
+				<div class="span14 offset1">
+					<h1>Suckless Mobile Apps Support</h1>
+
+					<div class="markets">
+						<img src="/assets/img/android.png" class="android" />
+						<img src="/assets/img/appstore.png" class="appstore" />
+						<img src="/assets/img/wp7.png" class="wp7" />
+
+						<img src="/assets/img/review.png" class="review1" />
+						<img src="/assets/img/review.png" class="review2" />
+						<img src="/assets/img/review.png" class="review3" />
+						<img src="/assets/img/review.png" class="review4" />
+						<img src="/assets/img/review.png" class="review5" />
+						<img src="/assets/img/review.png" class="review6" />
+						<img src="/assets/img/review.png" class="review7" />
+						<img src="/assets/img/review.png" class="review8" />
+						<img src="/assets/img/review.png" class="review9" />
+						<img src="/assets/img/review.png" class="review10" />
+					</div>
+
+					<div class="line">
+						
+					</div>
+
+					<form class="signup" onsubmit="return false">
+						<input type="text" class="large" placeholder="Enter your Email" name="email" id="email"/>
+						<input type="submit" class="btn large success" value="Sign Up" id="signup"/>
+					</form>
+					<h2 class="thanks" style="display:none">Thanks for Subscribing!</h2>
+
+					<div class="reviews">
+						<h2><span>1</span>Up-to-date Customer Reviews in one place</h2>
+						<h2><span>2</span>Get only Helpfull Reviews</h2>
+						<h2><span>3</span>Get notified when your Customers are Sad</h2>
+						<h2><span>4</span>Integration with existing Helpdesk Solutions</h2>
+					</div>
+				</div>								
+			</div>
+			<div class="row" id="section_two"></div>
+
+			<div class="message">
+				Launching early 2012
+			</div>
+
+			<div class="footer">
+				Questions? Email us: hello@appfeedbackhq.com
+			</div>
+
+			<a href="http://mixpanel.com/f/partner"><img src="http://mixpanel.com/site_media/images/partner/badge_blue.png" alt="Real Time Web Analytics" style="position: absolute; left: -99999px"/></a>
+		</div>
+
+		<script type="text/javascript" src="/assets/javascript/lib/jquery.min.js"></script>
+
+		<script>
+			$('form.signup').bind('submit', function(){
+				var email = $('#email').val();
+
+				if (email.trim() != "") {
+					$('form.signup').hide();
+					$('.thanks').show();
+
+					mpq.identify(email);
+					mpq.name_tag(email);
+					mpq.track("Email submited", { email:email });
+				} else {
+					mpq.track("Email Error");
+					alert("Oh, please enter your Email address first")
+				}
+			})
+		</script>
+
+		<!-- Yandex.Metrika counter -->
+		<div style="display:none;"><script type="text/javascript">
+		(function(w, c) {
+		    (w[c] = w[c] || []).push(function() {
+		        try {
+		            w.yaCounter11596621 = new Ya.Metrika({id:11596621, enableAll: true, webvisor:true});
+		        }
+		        catch(e) { }
+		    });
+		})(window, "yandex_metrika_callbacks");
+		</script></div>
+		<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+		<noscript><div><img src="//mc.yandex.ru/watch/11596621" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

@@ -16,6 +16,9 @@ handlers:
 - url: /assets
   static_dir: assets
 
+- url: /task/.*
+  script: tasks.app
+
 - url: /.*
   script: main.app
 
